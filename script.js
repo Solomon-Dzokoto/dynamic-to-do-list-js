@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
-
    
     function saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -28,15 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const button = document.createElement("button");
         button.textContent = "Remove";
         button.classList.add('remove-btn');
+        textContent.appendChild(button);
 
         button.onclick = function () {
-            removeTask(taskText);
+            taskList.removeChild(textContent)
+            tasks = tasks.filter(task => task !== taskText);
+            saveTasks()
         };
-
-        textContent.appendChild(button);
         taskList.appendChild(textContent);
     }
-
     
     function addTask() {
         const taskText = taskInput.value.trim();
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (taskText !== "") {
             tasks.push(taskText); // Update tasks array
             createTaskElement(taskText); 
-            saveTasks(); // Save to Local Storage
+            saveTasks();
 
             taskInput.value = ""; 
         } else {
@@ -52,15 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-   
-    function removeTask(taskText) {
-        tasks = tasks.filter(task => task !== taskText); // Update tasks array
-        saveTasks(); 
-        taskList.innerHTML = ""; t
-        loadTasks(); 
-    }
 
-   
     addButton.addEventListener("click", addTask);
     taskInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
