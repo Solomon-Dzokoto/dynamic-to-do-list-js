@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded",function(){
  
 
     function addTask(){
-        const taskText = taskInput.value;
+        const taskText = taskInput.value.trim();
 
         if(taskText !== ""){
             const textContent = document.createElement("li");
